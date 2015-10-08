@@ -20,7 +20,7 @@ menu()
 {
 echo Please select from the following architectures:
 # Getting the list of architectures available from the Ubuntu Kernel page
-IFS=$'\r\n' && export options=(`curl -s $URL_PREFIX | awk -F"=\"|\">|G." '/BUILD\.LOG\../ && !/binary-headers/ {print $8}' | nl -w1 -s ") "`)
+IFS=$'\r\n' && export options=(`curl -s $URL_PREFIX | awk -F"_|.deb" '/.deb/ && !/all/ && !seen[$6]++ {print $6}' | nl -w1 -s ") "`)
 opt_length=${#options[@]}
 
 unset REPLY
